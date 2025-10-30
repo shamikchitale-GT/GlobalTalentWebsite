@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Global Talent — Coming Soon</title>
+  <meta name="description" content="Careers without borders. A platform connecting U.S.-educated international graduates to global tech opportunities outside the U.S.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236d8bff'/%3E%3C/svg%3E">
+  <style>
+    body {font-family: Arial, sans-serif; margin: 0; background: #0b0d10; color: #e8eef5;}
+    header {display: flex; justify-content: space-between; align-items: center; padding: 20px;}
+    .logo {font-weight: bold; font-size: 20px; color: #6d8bff;}
+    .chip {background: #1a1a1a; border-radius: 20px; padding: 6px 12px; font-size: 12px; color: #a6b0be; margin-left: 5px; text-decoration: none;}
+    .container {max-width: 1000px; margin: auto; padding: 20px;}
+    h1 {font-size: 40px; color: white;}
+    p {color: #a6b0be;}
+    .btn {background: linear-gradient(135deg, #6d8bff, #a855f7); border: none; color: white; padding: 10px 20px; border-radius: 10px; cursor: pointer;}
+    .card {background: #11151b; border-radius: 10px; padding: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);}
+    input, textarea {width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.1); background: #0b1016; color: white;}
+    footer {text-align: center; padding: 20px; color: #777; font-size: 12px;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Global Talent</div>
+      <nav>
+        <a class="chip" href="#learn">About</a>
+        <a class="chip" href="#students">For Students</a>
+        <a class="chip" href="#recruiters">For Recruiters</a>
+        <span class="chip">Coming Soon • Careers without borders</span>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Talented. Global. Unstoppable.</h1>
+      <p>The world needs your talent — not your visa status. We connect U.S.-educated international graduates to high-growth tech roles <strong>outside the U.S.</strong></p>
+      <button class="btn" id="notifyBtn">Request Early Access</button>
+      <p style="font-size:13px;">No spam. Just launch updates and global opportunities.</p>
+
+      <div class="card">
+        <form id="emailForm">
+          <input id="email" type="email" placeholder="Enter your email" required>
+          <button class="btn" type="submit">Notify Me</button>
+        </form>
+      </div>
+
+      <section id="learn">
+        <div class="card">
+          <h2>What we’re building</h2>
+          <p>A launchpad for U.S.-educated international students to land roles abroad with clear, visa-aware pathways. Curated companies. Real relocation. Careers without borders.</p>
+          <ul>
+            <li>No U.S. jobs — <strong>global only</strong></li>
+            <li>Country guides & employer playbooks</li>
+            <li>Invite-only early access cohort</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="students" style="margin-top:64px">
+        <div class="card">
+          <h2>For Students</h2>
+          <p>
+            U.S.-educated international student or recent grad? Tell us where you’d like to work
+            <strong>outside the U.S.</strong> and what roles you’re targeting—so we can invite you to the early-access cohort.
+          </p>
+
+          <form action="https://formspree.io/f/xgvplzjl" method="POST">
+            <input type="hidden" name="_subject" value="Student Inquiry - Global Talent" />
+            <label>Your Name</label>
+            <input name="name" type="text" placeholder="First Last" required>
+            <label>Email</label>
+            <input name="email" type="email" placeholder="you@example.com" required>
+            <label>University</label>
+            <input name="university" type="text" placeholder="e.g., Suffolk University" required>
+            <label>Program / Degree</label>
+            <input name="program" type="text" placeholder="MS Business Analytics" required>
+            <label>Graduation (Month/Year)</label>
+            <input name="grad" type="text" placeholder="Dec 2025" required>
+            <label>Preferred Countries</label>
+            <input name="countries" type="text" placeholder="Canada, UK, Germany, Singapore…" required>
+            <label>Target Roles</label>
+            <input name="roles" type="text" placeholder="Data Analyst, Backend Engineer, Product Manager…" required>
+            <label>Message (optional)</label>
+            <textarea name="message" rows="4" placeholder="Anything we should know? Visa status, languages, relocation flexibility…"></textarea>
+            <label><input type="checkbox" name="consent" required> I agree to be contacted about opportunities and related services.</label>
+            <button class="btn" type="submit">Join Early Access</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="recruiters">
+        <div class="card">
+          <h2>For Recruiters</h2>
+          <p>We connect U.S.-educated international grads with roles <strong>outside the U.S.</strong>. Tell us what you're hiring for and where you can hire.</p>
+
+          <form action="https://formspree.io/f/xgvplzjl" method="POST">
+            <input type="hidden" name="_subject" value="Recruiter Inquiry - Global Talent" />
+            <label>Your Name</label>
+            <input name="name" type="text" placeholder="Jane Doe" required>
+            <label>Work Email</label>
+            <input name="email" type="email" placeholder="jane@company.com" required>
+            <label>Company</label>
+            <input name="company" type="text" placeholder="Acme Tech" required>
+            <label>Hiring Location(s)</label>
+            <input name="locations" type="text" placeholder="Canada, UK, Singapore…" required>
+            <label>Open Roles</label>
+            <input name="roles" type="text" placeholder="Backend Engineer, Data Scientist…" required>
+            <label>Message</label>
+            <textarea name="message" rows="4" placeholder="Team, stack, timeline, visa/relocation support."></textarea>
+            <label><input type="checkbox" name="consent" required> I agree to be contacted about candidates and related services.</label>
+            <button class="btn" type="submit">Send Inquiry</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="yr"></span> Global Talent — Coming Soon
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const form = document.getElementById('emailForm');
+    const emailInput = document.getElementById('email');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if(!valid){
+        alert('Please enter a valid email address.');
+        return;
+      }
+      alert('Thank you! You will be notified when we launch.');
+      emailInput.value = '';
+    });
+  </script>
+</body>
+</html>
