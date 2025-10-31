@@ -3,138 +3,241 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Global Talent — Coming Soon</title>
-  <meta name="description" content="Careers without borders. A platform connecting U.S.-educated international graduates to global tech opportunities outside the U.S.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236d8bff'/%3E%3C/svg%3E">
+  <title>GradGoGlobal — Hire U.S.-Trained Tech Talent Beyond the U.S.</title>
+  <meta name="description" content="We connect global employers with elite international graduates from U.S. universities—ready to relocate where a job offer enables work authorization. No U.S. placements." />
+  <link rel="canonical" href="https://gradgoglobal.com/" />
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="white" stroke="%230A0A0A" stroke-width="8"/><path d="M85 35 L115 5 M115 5 L115 45" stroke="%23D90429" stroke-width="12" stroke-linecap="round"/></svg>'/>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {font-family: Arial, sans-serif; margin: 0; background: #0b0d10; color: #e8eef5;}
-    header {display: flex; justify-content: space-between; align-items: center; padding: 20px;}
-    .logo {font-weight: bold; font-size: 20px; color: #6d8bff;}
-    .chip {background: #1a1a1a; border-radius: 20px; padding: 6px 12px; font-size: 12px; color: #a6b0be; margin-left: 5px; text-decoration: none;}
-    .container {max-width: 1000px; margin: auto; padding: 20px;}
-    h1 {font-size: 40px; color: white;}
-    p {color: #a6b0be;}
-    .btn {background: linear-gradient(135deg, #6d8bff, #a855f7); border: none; color: white; padding: 10px 20px; border-radius: 10px; cursor: pointer;}
-    .card {background: #11151b; border-radius: 10px; padding: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);}
-    input, textarea {width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.1); background: #0b1016; color: white;}
-    footer {text-align: center; padding: 20px; color: #777; font-size: 12px;}
+    html{scroll-behavior:smooth}
+    .container{max-width:1152px}
+    /* simple reveal animation */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.show{opacity:1;transform:none}
   </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">Global Talent</div>
-      <nav>
-        <a class="chip" href="#learn">About</a>
-        <a class="chip" href="#students">For Students</a>
-        <a class="chip" href="#recruiters">For Recruiters</a>
-        <span class="chip">Coming Soon • Careers without borders</span>
+<body class="bg-white text-neutral-900">
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 border-b border-neutral-200 bg-white/85 backdrop-blur">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3 font-semibold">
+        <svg width="36" height="36" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GradGoGlobal logo">
+          <circle cx="60" cy="60" r="50" stroke="#0A0A0A" stroke-width="10"/>
+          <path d="M85 35 L115 5 M115 5 L115 45" stroke="#D90429" stroke-width="12" stroke-linecap="round"/>
+        </svg>
+        <span class="text-lg">GradGoGlobal</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#how" class="hover:text-neutral-600">How it Works</a>
+        <a href="#recruiters" class="hover:text-neutral-600">For Recruiters</a>
+        <a href="#students" class="hover:text-neutral-600">For Students</a>
+        <a href="#countries" class="hover:text-neutral-600">Eligible Countries</a>
+        <a href="#faq" class="hover:text-neutral-600">FAQ</a>
+        <a href="#contact" class="inline-flex items-center rounded-xl border px-3 py-1.5 hover:bg-neutral-50">Contact</a>
       </nav>
-    </header>
-
-    <main>
-      <h1>Talented. Global. Unstoppable.</h1>
-      <p>The world needs your talent — not your visa status. We connect U.S.-educated international graduates to high-growth tech roles <strong>outside the U.S.</strong></p>
-      <button class="btn" id="notifyBtn">Request Early Access</button>
-      <p style="font-size:13px;">No spam. Just launch updates and global opportunities.</p>
-
-      <div class="card">
-        <form id="emailForm">
-          <input id="email" type="email" placeholder="Enter your email" required>
-          <button class="btn" type="submit">Notify Me</button>
-        </form>
+      <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-lg border px-3 py-2" aria-label="Open Menu">Menu</button>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t bg-white">
+      <div class="container mx-auto px-4 py-3 grid gap-3 text-sm">
+        <a href="#how" class="py-1">How it Works</a>
+        <a href="#recruiters" class="py-1">For Recruiters</a>
+        <a href="#students" class="py-1">For Students</a>
+        <a href="#countries" class="py-1">Eligible Countries</a>
+        <a href="#faq" class="py-1">FAQ</a>
+        <a href="#contact" class="py-1">Contact</a>
       </div>
+    </div>
+  </header>
 
-      <section id="learn">
-        <div class="card">
-          <h2>What we’re building</h2>
-          <p>A launchpad for U.S.-educated international students to land roles abroad with clear, visa-aware pathways. Curated companies. Real relocation. Careers without borders.</p>
-          <ul>
-            <li>No U.S. jobs — <strong>global only</strong></li>
-            <li>Country guides & employer playbooks</li>
-            <li>Invite-only early access cohort</li>
+  <!-- HERO -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-neutral-950"></div>
+    <div class="relative container mx-auto px-4 py-24 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <h1 class="text-white text-4xl sm:text-5xl font-extrabold leading-tight">
+          Hire U.S.-Trained Tech Talent — <span class="text-neutral-300">Beyond the U.S.</span>
+        </h1>
+        <div class="mt-6 space-y-4">
+          <div class="rounded-2xl border border-[#D90429]/30 bg-[#D90429]/10 p-5">
+            <p class="text-base text-neutral-200"><span class="font-semibold text-white">Mission:</span> Connect international graduates trained in the United States with employers across <span class="font-semibold">Europe, Germany, Singapore, Hong Kong, Malaysia, and the UAE (Dubai)</span>—so a <span class="font-semibold">job offer unlocks work authorization</span> and relocation in weeks, not years.</p>
+          </div>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="rounded-xl border bg-white p-4 text-center text-sm font-medium text-neutral-800">
+              U.S. trained talent.<br>Hired globally.<br><span class="text-[#D90429] font-semibold">No sponsorship needed.</span>
+            </div>
+            <div class="rounded-xl border bg-white p-4 text-center text-sm font-medium text-neutral-800">
+              Turn America’s immigration<br>problem into your<br><span class="text-[#D90429] font-semibold">talent advantage.</span>
+            </div>
+            <div class="rounded-xl border bg-white p-4 text-center text-sm font-medium text-neutral-800">
+              You don’t need to be in the U.S.<br>to hire the best from<br><span class="text-[#D90429] font-semibold">U.S. universities.</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#recruiters" class="rounded-2xl bg-[#D90429] px-5 py-3 font-medium text-white hover:opacity-95">For Recruiters</a>
+          <a href="#students" class="rounded-2xl bg-neutral-800 px-5 py-3 font-medium text-white ring-1 ring-white/10 hover:bg-neutral-700">Join Student Waitlist</a>
+        </div>
+        <p class="mt-4 text-sm text-neutral-400 max-w-xl">
+          Built by an international grad who lived the visa crunch—turning a broken moment into global opportunity.
+        </p>
+        <!-- Launch banner -->
+        <div class="mt-4 rounded-xl border border-[#D90429]/40 bg-[#D90429]/10 p-4 text-sm text-[#D90429] font-semibold max-w-xl">
+          🚀 <strong>Launching November 15</strong> — register early to be prioritized and considered by recruiters first. Partnering with top global firms.
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="rounded-3xl border border-neutral-800 bg-neutral-900 p-6">
+          <h2 class="text-white text-xl font-semibold">Why now?</h2>
+          <ul class="mt-4 space-y-3 text-sm text-neutral-300">
+            <li>• H-1B tightening & "hire local" trends block great talent in the U.S.</li>
+            <li>• Post-graduation windows are short—many won’t land U.S. roles in time.</li>
+            <li>• Your country may grant work rights with a <span class="font-medium text-white">simple job offer</span>.</li>
           </ul>
+          <p class="mt-4 text-sm text-neutral-400">This is the moment to access U.S.-trained CS/AI/Data talent.</p>
         </div>
-      </section>
+      </div>
+    </div>
 
-      <section id="students" style="margin-top:64px">
-        <div class="card">
-          <h2>For Students</h2>
-          <p>
-            U.S.-educated international student or recent grad? Tell us where you’d like to work
-            <strong>outside the U.S.</strong> and what roles you’re targeting—so we can invite you to the early-access cohort.
-          </p>
-
-          <form action="https://formspree.io/f/xgvplzjl" method="POST">
-            <input type="hidden" name="_subject" value="Student Inquiry - Global Talent" />
-            <label>Your Name</label>
-            <input name="name" type="text" placeholder="First Last" required>
-            <label>Email</label>
-            <input name="email" type="email" placeholder="you@example.com" required>
-            <label>University</label>
-            <input name="university" type="text" placeholder="e.g., Suffolk University" required>
-            <label>Program / Degree</label>
-            <input name="program" type="text" placeholder="MS Business Analytics" required>
-            <label>Graduation (Month/Year)</label>
-            <input name="grad" type="text" placeholder="Dec 2025" required>
-            <label>Preferred Countries</label>
-            <input name="countries" type="text" placeholder="Canada, UK, Germany, Singapore…" required>
-            <label>Target Roles</label>
-            <input name="roles" type="text" placeholder="Data Analyst, Backend Engineer, Product Manager…" required>
-            <label>Message (optional)</label>
-            <textarea name="message" rows="4" placeholder="Anything we should know? Visa status, languages, relocation flexibility…"></textarea>
-            <label><input type="checkbox" name="consent" required> I agree to be contacted about opportunities and related services.</label>
-            <button class="btn" type="submit">Join Early Access</button>
-          </form>
+    <!-- Typewriter bar -->
+    <div class="bg-white">
+      <div class="container mx-auto px-4 py-6">
+        <div class="rounded-2xl border p-5 flex flex-col lg:flex-row items-center justify-between gap-4">
+          <div class="text-sm text-neutral-600">Recruiter promise: <span class="font-semibold text-[#D90429]">Get shortlists within 48 hours</span></div>
+          <div class="text-center text-lg font-semibold"><span id="tw"></span></div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section id="recruiters">
-        <div class="card">
-          <h2>For Recruiters</h2>
-          <p>We connect U.S.-educated international grads with roles <strong>outside the U.S.</strong>. Tell us what you're hiring for and where you can hire.</p>
+  <!-- HOW -->
+  <section id="how" class="py-20 reveal">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold">How GradGoGlobal Works</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-2xl bg-white p-6 border"><h3 class="font-semibold">1) Tell us your role & location</h3><p class="mt-2 text-sm text-neutral-600">Title, stack, seniority, country/city, start window.</p></div>
+        <div class="rounded-2xl bg-white p-6 border"><h3 class="font-semibold">2) Visa-aware shortlists</h3><p class="mt-2 text-sm text-neutral-600">Candidates pre-filtered for countries where an offer enables work authorization.</p></div>
+        <div class="rounded-2xl bg-white p-6 border"><h3 class="font-semibold">3) Meet U.S.-trained talent</h3><p class="mt-2 text-sm text-neutral-600">CS/AI/Data grads from leading U.S. programs—portfolio, GitHub, references.</p></div>
+        <div class="rounded-2xl bg-white p-6 border"><h3 class="font-semibold">4) Offer → relocate → start</h3><p class="mt-2 text-sm text-neutral-600">We coordinate docs and timelines to accelerate starts.</p></div>
+      </div>
+    </div>
+  </section>
 
-          <form action="https://formspree.io/f/xgvplzjl" method="POST">
-            <input type="hidden" name="_subject" value="Recruiter Inquiry - Global Talent" />
-            <label>Your Name</label>
-            <input name="name" type="text" placeholder="Jane Doe" required>
-            <label>Work Email</label>
-            <input name="email" type="email" placeholder="jane@company.com" required>
-            <label>Company</label>
-            <input name="company" type="text" placeholder="Acme Tech" required>
-            <label>Hiring Location(s)</label>
-            <input name="locations" type="text" placeholder="Canada, UK, Singapore…" required>
-            <label>Open Roles</label>
-            <input name="roles" type="text" placeholder="Backend Engineer, Data Scientist…" required>
-            <label>Message</label>
-            <textarea name="message" rows="4" placeholder="Team, stack, timeline, visa/relocation support."></textarea>
-            <label><input type="checkbox" name="consent" required> I agree to be contacted about candidates and related services.</label>
-            <button class="btn" type="submit">Send Inquiry</button>
-          </form>
+  <!-- RECRUITERS -->
+  <section id="recruiters" class="py-20 bg-neutral-50 reveal">
+    <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="text-3xl font-bold">For Employers & Recruiters</h2>
+        <p class="mt-2 text-neutral-700">Tap into a pipeline of international students educated in the U.S.—available to relocate to your country where an offer streamlines work rights.</p>
+        <ul class="mt-6 space-y-3 text-neutral-800 text-sm">
+          <li>• <span class="font-medium">U.S.-educated, globally mobile</span> CS/AI/Data/SE talent</li>
+          <li>• <span class="font-medium">Visa-aware matching</span> by country & program</li>
+          <li>• <span class="font-medium">Curated quality</span>: portfolios, references, code</li>
+          <li>• <span class="font-medium">Speed</span>: shortlist in days, not weeks</li>
+        </ul>
+      </div>
+      <!-- Formspree recruiter form -->
+      <form action="https://formspree.io/f/xgvplzjl" method="POST" class="rounded-3xl border bg-white p-6 shadow-sm">
+        <input type="hidden" name="_subject" value="Recruiter Inquiry - GradGoGlobal" />
+        <h3 class="text-lg font-semibold">Request Shortlist</h3>
+        <p class="mt-1 text-sm text-neutral-600">Tell us your role & location. We’ll reply with profiles.</p>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          <input name="name" required placeholder="Your name" class="w-full rounded-xl border px-4 py-3" />
+          <input name="email" required type="email" placeholder="Work email" class="w-full rounded-xl border px-4 py-3" />
+          <input name="company" placeholder="Company" class="w-full rounded-xl border px-4 py-3 sm:col-span-2" />
+          <input name="role" placeholder="Role (e.g., ML Engineer)" class="w-full rounded-xl border px-4 py-3 sm:col-span-2" />
+          <input name="location" placeholder="Country / City" class="w-full rounded-xl border px-4 py-3 sm:col-span-2" />
+          <textarea name="notes" placeholder="Team, stack, level, start date" class="w-full rounded-xl border px-4 py-3 sm:col-span-2" rows="3"></textarea>
         </div>
-      </section>
-    </main>
+        <label class="mt-2 inline-flex items-center gap-2 text-xs text-neutral-600">
+          <input type="checkbox" name="consent" required class="accent-[#D90429]"/> I agree to be contacted about candidates & related services.
+        </label>
+        <button class="mt-3 w-full rounded-2xl bg-[#D90429] px-5 py-3 font-medium text-white hover:opacity-95">Get Candidates</button>
+        <p class="mt-2 text-xs text-neutral-500">We never place in the U.S. — non-U.S. roles only.</p>
+      </form>
+    </div>
+  </section>
 
-    <footer>
-      © <span id="yr"></span> Global Talent — Coming Soon
-    </footer>
-  </div>
+  <!-- STUDENTS -->
+  <section id="students" class="py-20 reveal">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">For Students & Graduates</h2>
+      <p class="text-neutral-700 mb-6 max-w-2xl mx-auto">U.S.-educated? International? Join and upload your resume. Early sign‑ups are prioritized at launch.</p>
+      <a href="https://forms.gle/CYfRoabvDvRPaGNu7" target="_blank" class="inline-block rounded-2xl bg-neutral-900 px-6 py-4 text-white font-medium hover:bg-neutral-700">Join Waitlist & Upload Resume</a>
+      <!-- Inline embed placeholder (optional). Replace src with Google Forms embed URL to show form inline) -->
+      <!-- <div class="mt-6 rounded-2xl border overflow-hidden max-w-3xl mx-auto">
+        <iframe src="https://docs.google.com/forms/d/e/YOUR_EMBED_ID/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div> -->
+    </div>
+  </section>
 
+  <!-- COUNTRIES -->
+  <section id="countries" class="py-20 bg-neutral-50 reveal">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold">Eligible Countries (offer → work path)</h2>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇪🇺 Europe (EU/UK)</h3><p class="mt-1 text-sm text-neutral-700">Skilled routes across EU & UK; strong demand for CS/AI/Data.</p></div>
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇩🇪 Germany</h3><p class="mt-1 text-sm text-neutral-700">EU Blue Card / Skilled Immigration; thriving deep-tech hubs.</p></div>
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇸🇬 Singapore</h3><p class="mt-1 text-sm text-neutral-700">Employer-sponsored passes; APAC HQ hub.</p></div>
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇭🇰 Hong Kong</h3><p class="mt-1 text-sm text-neutral-700">Talent admission schemes; finance & data roles.</p></div>
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇲🇾 Malaysia</h3><p class="mt-1 text-sm text-neutral-700">Growing tech corridors; employer-sponsored permits.</p></div>
+        <div class="rounded-xl border bg-white p-5"><h3 class="font-semibold">🇦🇪 United Arab Emirates</h3><p class="mt-1 text-sm text-neutral-700">Dubai/Abu Dhabi: employer-sponsored visas; fast relocation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 reveal">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold">FAQ</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="rounded-2xl border p-6"><h3 class="font-semibold">Do you place in the U.S.?</h3><p class="mt-2 text-sm text-neutral-700">No. We only connect talent to non-U.S. roles.</p></div>
+        <div class="rounded-2xl border p-6"><h3 class="font-semibold">Do you simplify OPT/CPT?</h3><p class="mt-2 text-sm text-neutral-700">No. We do not provide U.S. immigration services. Our focus is countries where an offer can enable work authorization.</p></div>
+        <div class="rounded-2xl border p-6"><h3 class="font-semibold">Who are the candidates?</h3><p class="mt-2 text-sm text-neutral-700">International students from U.S. programs in CS, AI, Data, and related fields.</p></div>
+        <div class="rounded-2xl border p-6"><h3 class="font-semibold">How fast can I get a shortlist?</h3><p class="mt-2 text-sm text-neutral-700">Typically within days once we have your role and location.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="py-16 reveal">
+    <div class="container mx-auto px-4">
+      <div class="rounded-3xl bg-neutral-950 p-8 text-white">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-2xl font-bold">Be part of the future of global hiring.</h2>
+            <p class="mt-2 text-neutral-300">Recruiters: request a shortlist. Students: join the waitlist.</p>
+          </div>
+          <div class="text-left lg:text-right">
+            <a href="#recruiters" class="mr-3 inline-block rounded-2xl bg-[#D90429] px-5 py-3 font-medium text-white hover:opacity-95">For Recruiters</a>
+            <a href="#students" class="inline-block rounded-2xl bg-neutral-800 px-5 py-3 font-medium text-white ring-1 ring-white/10 hover:bg-neutral-700">For Students</a>
+          </div>
+        </div>
+      </div>
+      <p class="mt-6 text-center text-xs text-neutral-500">© <span id="year"></span> GradGoGlobal — Non-U.S. placements only.</p>
+    </div>
+  </section>
+
+  <!-- JS -->
   <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-    const form = document.getElementById('emailForm');
-    const emailInput = document.getElementById('email');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const email = emailInput.value.trim();
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if(!valid){
-        alert('Please enter a valid email address.');
-        return;
-      }
-      alert('Thank you! You will be notified when we launch.');
-      emailInput.value = '';
-    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const btn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
+    btn && btn.addEventListener('click',()=>menu.classList.toggle('hidden'));
+    // typewriter
+    const lines=[
+      'U.S. trained talent. Hired globally. <strong class="text-[#D90429]">No sponsorship needed.</strong>',
+      'Turn America\'s immigration problem into your <strong class="text-[#D90429]">talent advantage.</strong>',
+      'You don\'t need to be in the U.S. to hire the best from <strong class="text-[#D90429]">U.S. universities.</strong>'
+    ];
+    const tw=document.getElementById('tw');
+    let i=0,j=0,deleting=false;function type(){const t=lines[i];tw.innerHTML=t.slice(0,j);if(!deleting){j++;if(j>t.length+5)deleting=true;}else{j--;if(j<=0){deleting=false;i=(i+1)%lines.length;}}setTimeout(type,deleting?25:35);} if(tw) type();
+    // reveal on scroll
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </script>
 </body>
 </html>
+
+
+
+
+
