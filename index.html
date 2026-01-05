@@ -18,12 +18,107 @@
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     html { scroll-behavior: smooth; }
     .container { max-width: 1152px; }
-    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
     .reveal.show { opacity: 1; transform: none; }
+
+    /* Subtle background grain for "premium" feel */
+    .grain:before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: radial-gradient(rgba(0,0,0,.045) 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity:.35;
+      pointer-events:none;
+      mask-image: radial-gradient(circle at 20% 10%, black 30%, transparent 70%);
+    }
+
+    /* GLOBAL CTA BUTTONS (black + red theme) */
+    .btn-primary{
+      background:#0B0B0D;
+      color:#FFFFFF;
+      border:1px solid rgba(217,4,41,0.75);
+      border-radius: 16px;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+    }
+    .btn-primary:hover{
+      background:#D90429;
+      border-color:#D90429;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(217,4,41,0.20);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:#FF6B6B;
+      border:1px solid rgba(217,4,41,0.65);
+      border-radius: 16px;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .btn-secondary:hover{
+      background:#D90429;
+      color:#ffffff;
+      border-color:#D90429;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(217,4,41,0.18);
+    }
+
+    .btn-tertiary{
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 16px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn-tertiary:hover{
+      background: rgba(217,4,41,0.18);
+      border-color: rgba(217,4,41,0.55);
+      transform: translateY(-2px);
+    }
+
+    /* HOW IT WORKS: red glass badge + hover pop */
+    .glass-badge {
+      background: rgba(217, 4, 41, 0.22);            /* #D90429 w/ transparency */
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 28px rgba(217, 4, 41, 0.18);
+      transition: transform .18s ease, box-shadow .18s ease;
+      color: #0B0B0D; /* numbers in bubbles should be black */
+    }
+
+    .how-card {
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      will-change: transform;
+    }
+
+    .how-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(217, 4, 41, 0.35);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.10);
+    }
+
+    .how-card:hover .glass-badge {
+      transform: scale(1.06);
+      box-shadow: 0 14px 36px rgba(217, 4, 41, 0.26);
+    }
+
+    /* Reusable pop card (site-wide "bubble" hover) */
+    .pop-card {
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      will-change: transform;
+    }
+    .pop-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      border-color: rgba(217, 4, 41, 0.35); /* red hint */
+      box-shadow: 0 18px 44px rgba(0,0,0,0.10);
+    }
   </style>
+
   <noscript>
     <style>
       .reveal { opacity: 1 !important; transform: none !important; }
@@ -31,96 +126,177 @@
   </noscript>
 </head>
 
-<body class="bg-white text-neutral-900">
+<body id="top" class="bg-white text-neutral-900">
 
   <!-- NAV -->
   <header class="sticky top-0 z-40 border-b border-neutral-200 bg-white/85 backdrop-blur">
     <div class="container mx-auto px-4 h-16 flex items-center justify-between">
       <a href="#top" class="flex items-center gap-3 font-semibold">
         <img src="logo.png" alt="GradGoGlobal Logo" class="h-10 w-auto" />
-        <span class="text-lg font-semibold">GradGoGlobal</span>
+        <span class="text-lg font-semibold tracking-tight">GradGoGlobal</span>
       </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="#about" class="hover:text-neutral-600">About</a>
-        <a href="#why" class="hover:text-neutral-600">Why GradGoGlobal</a>
-        <a href="#recruiters" class="hover:text-neutral-600">For Recruiters</a>
-        <a href="#talent" class="hover:text-neutral-600">For Talent</a>
-        <a href="#innovation" class="hover:text-neutral-600">PriorityMatch AI™</a>
-        <a href="#contact" class="inline-flex items-center rounded-xl border px-3 py-1.5 hover:bg-neutral-50">Contact</a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm text-neutral-700">
+        <a href="#how" class="hover:text-neutral-900">How it works</a>
+        <a href="#recruiters" class="hover:text-neutral-900">Recruiters</a>
+        <a href="#talent" class="hover:text-neutral-900">Talent</a>
+        <a href="#innovation" class="hover:text-neutral-900">PriorityMatch AI™</a>
+        <a href="#faq" class="hover:text-neutral-900">FAQ</a>
+        <a href="#contact" class="inline-flex items-center rounded-xl border border-neutral-300 px-3 py-1.5 hover:bg-neutral-50 text-neutral-900">Contact</a>
       </nav>
-      <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-lg border px-3 py-2" aria-label="Open Menu">
+
+      <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-lg border border-neutral-300 px-3 py-2 text-sm" aria-label="Open Menu">
         Menu
       </button>
     </div>
+
     <div id="mobileMenu" class="md:hidden hidden border-t bg-white">
-      <div class="container mx-auto px-4 py-3 grid gap-3 text-sm">
-        <a href="#about" class="py-1">About</a>
-        <a href="#why" class="py-1">Why GradGoGlobal</a>
-        <a href="#recruiters" class="py-1">For Recruiters</a>
-        <a href="#talent" class="py-1">For Talent</a>
+      <div class="container mx-auto px-4 py-3 grid gap-3 text-sm text-neutral-800">
+        <a href="#how" class="py-1">How it works</a>
+        <a href="#recruiters" class="py-1">Recruiters</a>
+        <a href="#talent" class="py-1">Talent</a>
         <a href="#innovation" class="py-1">PriorityMatch AI™</a>
+        <a href="#faq" class="py-1">FAQ</a>
         <a href="#contact" class="py-1">Contact</a>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="top" class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-neutral-950"></div>
-    <div class="relative container mx-auto px-4 py-24 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-7">
-        <div class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 border border-white/10 mb-4">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[10px] text-neutral-200 tracking-wide uppercase">
-            AI-first global hiring • Time-aware matching • Built for U.S.-trained talent
-          </span>
+  <!-- HERO (BLACK BG + WHITE TEXT) -->
+  <section class="relative overflow-hidden bg-black text-white">
+    <!-- subtle glow -->
+    <div class="absolute inset-0">
+      <div class="absolute -top-32 -right-20 h-[520px] w-[520px] rounded-full bg-red-600/20 blur-3xl"></div>
+      <div class="absolute -bottom-32 -left-24 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-3xl"></div>
+    </div>
+
+    <div class="relative container mx-auto px-4 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+        <!-- LEFT -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 border border-white/10">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="text-[11px] text-neutral-300 tracking-wide">
+              AI-first global hiring • Time-aware matching • Built for U.S.-trained talent
+            </span>
+          </div>
+
+          <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
+            Skill is the only variable.
+          </h1>
+
+          <p class="mt-5 text-lg sm:text-xl text-neutral-300 max-w-xl">
+            GradGoGlobal connects U.S.-trained international graduates with global recruiters using intelligent,
+            time-aware matching — so great skills meet the right opportunity at the right time.
+          </p>
+
+          <!-- CTA (black + red theme) -->
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#recruiters" class="btn-primary px-6 py-4 font-semibold">
+              For Recruiters → Discover Talent
+            </a>
+
+            <a href="#talent" class="btn-secondary px-6 py-4 font-semibold">
+              For Talent → Join the Network
+            </a>
+          </div>
+
+          <a href="#how" class="mt-4 inline-block btn-tertiary px-6 py-3 text-sm font-semibold">
+            See how it works
+          </a>
+
+          <!-- MINI VALUE CARDS (NO POP ANIMATION IN HERO) -->
+          <div class="mt-8 grid sm:grid-cols-3 gap-4 max-w-xl">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs text-neutral-400">Built for</div>
+              <div class="mt-1 font-semibold">Visa & timing realities</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs text-neutral-400">Matches by</div>
+              <div class="mt-1 font-semibold">Skill + timeline fit</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div class="text-xs text-neutral-400">Outcome</div>
+              <div class="mt-1 font-semibold">Faster global hiring</div>
+            </div>
+          </div>
         </div>
 
-        <h1 class="text-white text-4xl sm:text-5xl font-extrabold leading-tight">
-          Skill is the only variable.
-        </h1>
-        <p class="mt-3 text-xl text-neutral-300">
-          AI built to make global hiring faster, fairer, and truly borderless.
-        </p>
+        <!-- RIGHT -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- GO USA (POP allowed, but this is still hero-zone; keeping it subtle and NOT using pop-card class) -->
+          <a href="gousa.html"
+             class="block rounded-3xl border border-white/10 bg-white/5 p-7 hover:border-[#D90429] transition">
+            <span class="inline-flex rounded-full bg-[#D90429]/15 text-[#FF6B6B] px-3 py-1 text-[11px] font-semibold">
+              NEW INITIATIVE · Feb 2026 pilot
+            </span>
 
-        <p class="mt-5 text-sm text-neutral-300 max-w-xl">
-          GradGoGlobal connects U.S.-trained international graduates with global recruiters using intelligent,
-          time-aware matching — ensuring every great skill finds the right opportunity, at the right time.
-        </p>
+            <h2 class="mt-4 text-2xl font-extrabold">GO USA 🇺🇸</h2>
 
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#recruiters" class="rounded-2xl bg-[#D90429] px-5 py-3 font-medium text-white hover:opacity-95">
-            For Recruiters → Discover Talent
+            <p class="mt-2 text-sm text-neutral-300">
+              A student-first global hiring initiative for international grads facing tough U.S. timelines —
+              connecting you to recruiters in Canada, UAE, and other high-demand markets.
+            </p>
+
+            <div class="mt-4 text-sm font-semibold text-[#FF6B6B]">
+              Explore the GO USA program →
+            </div>
           </a>
-          <a href="#talent" class="rounded-2xl bg-neutral-800 px-5 py-3 font-medium text-white ring-1 ring-white/10 hover:bg-neutral-700">
-            For Talent → Join the Network
-          </a>
+
+          <!-- WHAT WE DO (NO pop-card class here to keep hero clean) -->
+          <div class="rounded-3xl bg-gradient-to-br from-neutral-900 to-black p-7 border border-white/10">
+            <div class="text-[11px] text-neutral-400">What we do</div>
+            <div class="mt-2 text-xl font-extrabold">
+              Time-aware matching that respects real deadlines.
+            </div>
+            <p class="mt-2 text-sm text-neutral-300">
+              PriorityMatch AI™ aligns recruiter hiring windows with candidate authorization timelines —
+              so the right profiles show up when they’re actually hireable.
+            </p>
+
+            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+                <div class="text-[11px] text-neutral-400">Recruiters</div>
+                <div class="mt-1 font-semibold">Curated feed</div>
+              </div>
+              <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+                <div class="text-[11px] text-neutral-400">Talent</div>
+                <div class="mt-1 font-semibold">Priority visibility</div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <p class="mt-4 text-xs text-neutral-500 max-w-md">
-          Built by an international graduate who lived the visa and timing gap — now turning it into a precise, time-aware hiring engine.
-        </p>
       </div>
 
-      <div class="lg:col-span-5">
-        <div class="rounded-3xl border border-neutral-800 bg-neutral-900 p-6">
-          <h2 class="text-white text-xl font-semibold">The Future of Hiring Has No Borders</h2>
-          <p class="mt-3 text-sm text-neutral-300">
-            The world no longer competes by borders — but by skill.
-          </p>
-          <p class="mt-3 text-sm text-neutral-300">
-            GradGoGlobal’s <span class="font-semibold text-white">Global PriorityMatch AI™</span> is a time-aware engine
-            that prioritizes candidates based on visa timelines, relocation readiness, and job relevance — helping recruiters hire smarter and faster.
-          </p>
-          <p class="mt-3 text-sm text-emerald-400">
-            Result: No time wasted. No opportunity lost.
-          </p>
+      <!-- TESTIMONIALS (NO pop-card class here to keep hero consistent) -->
+      <div class="mt-14 grid gap-4 md:grid-cols-3">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-neutral-300">
+          “Everyone’s pretty much done with LinkedIn. I’m happy there’s something else now —
+          I’m done with being ghosted.”
+          <div class="mt-3 text-xs text-neutral-400">
+            — Suffolk University student
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-neutral-300">
+          “This is an amazing initiative — finally a platform built for us.”
+          <div class="mt-3 text-xs text-neutral-400">
+            — Boston University student
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-sm text-neutral-300">
+          “There’s definitely a need for this today. LinkedIn has way too much noise.”
+          <div class="mt-3 text-xs text-neutral-400">
+            — Head of HR
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRUSTED BY SUFFOLK -->
+  <!-- TRUSTED -->
   <section class="py-4 bg-neutral-50 border-y border-neutral-200 reveal">
     <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-3">
       <p class="text-[11px] tracking-[0.12em] uppercase text-neutral-500">
@@ -135,206 +311,368 @@
     </div>
   </section>
 
-  <!-- TALENT SECTION (MOVED UP) -->
-  <section id="talent" class="py-20 bg-neutral-50 reveal text-center">
+  <!-- HOW IT WORKS (UPDATED) -->
+  <section id="how" class="py-18 sm:py-20 reveal">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-2">For Talent</h2>
-
-      <!-- STRONG CTA -->
-      <p class="text-lg font-semibold text-neutral-900 mb-3">
-        Get global opportunities before your OPT expires.
-      </p>
-
-      <p class="text-neutral-700 mb-3 max-w-2xl mx-auto">
-        Your degree was just the start — it deserves a global stage.
-      </p>
-
-      <p class="text-neutral-700 mb-5 max-w-2xl mx-auto text-sm">
-        You’ve built skills the world needs. GradGoGlobal connects your profile, goals, and hiring timeline with recruiters worldwide,
-        so your visibility spikes exactly when opportunities align with your work authorization window.
-        You’re no longer just a résumé — you’re a priority.
-      </p>
-
-      <div class="max-w-xl mx-auto text-left text-sm text-neutral-700 space-y-2">
-        <p class="font-semibold">What You’ll Get:</p>
-        <p>• Smart visibility powered by Global PriorityMatch AI™.</p>
-        <p>• Access to international recruiters seeking U.S.-trained graduates.</p>
-        <p>• Timing-aware discovery so you don’t miss your moment.</p>
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold tracking-tight">How it works</h2>
+        <!-- FIX: no truncation; full sentence visible -->
+        <p class="mt-3 text-sm text-neutral-700">
+          Simple on the surface. Powerful underneath. We combine skill signals with timing signals so hiring becomes faster, clearer, and fairer.
+        </p>
       </div>
 
-      <a href="https://forms.gle/CYfRoabvDvRPaGNu7" target="_blank"
-         class="mt-6 inline-block rounded-2xl bg-neutral-900 px-6 py-4 text-white font-medium hover:bg-neutral-700">
-        Create My Global Profile → Join GradGoGlobal Network
-      </a>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="how-card pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <div class="glass-badge inline-flex h-10 w-10 items-center justify-center rounded-2xl font-extrabold">1</div>
+          <h3 class="mt-4 font-semibold text-lg">Build a verified profile</h3>
+          <p class="mt-2 text-sm text-neutral-600">Talent joins once, shares skills + preferences + timeline. Recruiters share hiring needs + regions.</p>
+        </div>
 
-      <!-- COUNTER PILL -->
-      <div class="mt-4 flex justify-center">
-        <span class="inline-flex items-center rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1 text-sm font-semibold text-emerald-700">
-          124 students joined this week.
-        </span>
+        <div class="how-card pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <div class="glass-badge inline-flex h-10 w-10 items-center justify-center rounded-2xl font-extrabold">2</div>
+          <h3 class="mt-4 font-semibold text-lg">PriorityMatch AI™ ranks fit</h3>
+          <p class="mt-2 text-sm text-neutral-600">We score matches using role fit + relocation readiness + time-window alignment.</p>
+        </div>
+
+        <div class="how-card pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <div class="glass-badge inline-flex h-10 w-10 items-center justify-center rounded-2xl font-extrabold">3</div>
+          <h3 class="mt-4 font-semibold text-lg">Connect when it matters</h3>
+          <p class="mt-2 text-sm text-neutral-600">Recruiters see the right candidates earlier. Talent gets visibility before deadlines close doors.</p>
+        </div>
       </div>
 
-      <p class="mt-2 text-xs text-neutral-500">
-        Early members receive priority visibility as recruiter cohorts onboard.
-      </p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="py-16 reveal">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold">About GradGoGlobal</h2>
-      <p class="mt-4 text-sm text-neutral-700 max-w-3xl">
-        GradGoGlobal is redefining global hiring with a simple belief — <strong>skill is the only variable.</strong>
-        We’re building the world’s first AI platform that matches U.S.-trained international talent with global recruiters,
-        not just by experience, but by <strong>visa timing and hiring windows.</strong>
-      </p>
-      <p class="mt-3 text-sm text-neutral-700 max-w-3xl">
-        Our proprietary <strong>Global PriorityMatch AI™</strong> uses real-time insights on job demand, candidate skills,
-        and authorization timelines to surface the right profiles at the right moment — before timing becomes a barrier.
-      </p>
-      <p class="mt-3 text-sm text-neutral-700 max-w-3xl">
-        For recruiters, it’s an instant gateway to verified, globally minded professionals ready to make an impact.
-        For talent, it’s visibility when it matters most — transforming potential into placement.
-      </p>
-      <p class="mt-3 text-sm text-neutral-600">
-        Founded in Boston in 2025, GradGoGlobal sits at the intersection of AI, timing, and talent — creating a new category in fair global mobility.
-      </p>
-    </div>
-  </section>
-
-  <!-- MISSION -->
-  <section id="mission" class="py-16 bg-neutral-50 reveal">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold">Our Mission</h2>
-      <p class="mt-4 text-sm text-neutral-700 max-w-3xl">
-        To make global careers accessible, efficient, and fair.
-        We believe opportunity should be defined by skill — not by borders or paperwork.
-      </p>
-      <p class="mt-3 text-sm text-neutral-700 max-w-3xl">
-        At GradGoGlobal, technology and timing work together to power a truly borderless hiring experience,
-        where U.S.-trained international talent can build meaningful careers across the world.
-      </p>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section id="why" class="py-20 bg-neutral-50 reveal">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold">Why GradGoGlobal</h2>
-      <p class="mt-3 text-sm text-neutral-700 max-w-3xl">
-        Global hiring has been slow, complex, and biased by geography. We’re changing that.
-        GradGoGlobal brings clarity and speed to one of the world’s most complex challenges.
-      </p>
-      <div class="mt-8 grid gap-6 md:grid-cols-2">
-        <div class="rounded-2xl bg-white p-6 border">
-          <h3 class="font-semibold">Visa Time-Aware Matching</h3>
-          <p class="mt-2 text-sm text-neutral-600">
-            Our AI aligns open roles with each candidate’s time-sensitive hiring window for faster, smarter connections.
-          </p>
+      <div class="mt-10 pop-card rounded-3xl border border-neutral-200 bg-neutral-50 p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="text-sm font-semibold">Want to start with GO USA?</div>
+          <div class="mt-1 text-sm text-neutral-700">Join the Feb 2026 cohort campaign and get considered for early global roles.</div>
         </div>
-        <div class="rounded-2xl bg-white p-6 border">
-          <h3 class="font-semibold">Pre-Vetted Talent</h3>
-          <p class="mt-2 text-sm text-neutral-600">
-            Every profile is verified for skills, credibility, and relocation readiness — so you start from trust, not guesswork.
-          </p>
-        </div>
-        <div class="rounded-2xl bg-white p-6 border">
-          <h3 class="font-semibold">Accelerated Time-to-Hire</h3>
-          <p class="mt-2 text-sm text-neutral-600">
-            Reduce time-to-hire without compromising quality. What used to take months can now happen in weeks.
-          </p>
-        </div>
-        <div class="rounded-2xl bg-white p-6 border">
-          <h3 class="font-semibold">When Timing Meets Talent</h3>
-          <p class="mt-2 text-sm text-neutral-600">
-            Results happen when the right skills appear at the right time in front of the right teams. We engineer that.
-          </p>
-        </div>
+        <a href="gousa.html" class="btn-primary px-5 py-3 font-semibold">
+          GO USA → Learn more
+        </a>
       </div>
     </div>
   </section>
 
   <!-- RECRUITERS -->
-  <section id="recruiters" class=" py-20 reveal">
+  <section id="recruiters" class="py-20 bg-white reveal">
     <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-start">
       <div>
-        <h2 class="text-3xl font-bold">For Recruiters &amp; Hiring Teams</h2>
-        <p class="mt-3 text-neutral-700">
-          <strong>Hire beyond borders. Hire on time.</strong>
-        </p>
-        <p class="mt-3 text-sm text-neutral-700">
+        <div class="inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-[11px] text-neutral-700">
+          For Recruiters &amp; Hiring Teams
+        </div>
+
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight">Hire beyond borders. Hire on time.</h2>
+
+        <p class="mt-4 text-sm text-neutral-700">
           Every day, qualified talent misses opportunities because of timing mismatches.
           GradGoGlobal fixes that by combining AI precision with real-world hiring logic.
         </p>
-        <p class="mt-3 text-sm text-neutral-700">
-          Our <strong>Global PriorityMatch AI™</strong> identifies candidates whose hiring windows align with your open roles,
-          so you meet the right talent before time runs out.
-        </p>
-        <ul class="mt-4 text-sm text-neutral-700 space-y-2">
-          <li>• AI-curated candidate feed tailored by role, skill, and timing.</li>
-          <li>• Verified global profiles from U.S.-trained graduates.</li>
-          <li>• Faster, more confident hiring cycles powered by timing signals.</li>
-          <li>• Move beyond searching — start connecting.</li>
+
+        <ul class="mt-6 text-sm text-neutral-700 space-y-2">
+          <li class="flex gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-neutral-900"></span>AI-curated candidate feed tailored by role, skill, and timing.</li>
+          <li class="flex gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-neutral-900"></span>Verified global profiles from U.S.-trained graduates.</li>
+          <li class="flex gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-neutral-900"></span>Faster, more confident hiring cycles powered by timing signals.</li>
+          <li class="flex gap-2"><span class="mt-1 h-1.5 w-1.5 rounded-full bg-neutral-900"></span>Move beyond searching — start connecting.</li>
         </ul>
-        <a href="#contact" class="mt-6 inline-flex items-center rounded-2xl bg-[#D90429] px-5 py-3 text-white text-sm font-medium hover:opacity-95">
-          Access Recruiter Dashboard (Early Access)
-        </a>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#contact" class="btn-primary inline-flex items-center px-5 py-3 text-sm font-semibold">
+            Access Recruiter Dashboard (Early Access)
+          </a>
+          <a href="#innovation" class="btn-secondary inline-flex items-center px-5 py-3 text-sm font-semibold">
+            See PriorityMatch AI™
+          </a>
+        </div>
       </div>
 
-      <form action="https://formspree.io/f/xgvplzjl" method="POST" class="rounded-3xl border bg-white p-6 shadow-sm">
+      <!-- Recruiter form -->
+      <form action="https://formspree.io/f/xgvplzjl" method="POST" class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
         <input type="hidden" name="_subject" value="Recruiter Access Request - GradGoGlobal" />
         <h3 class="text-lg font-semibold">Request Recruiter Access</h3>
-        <div class="mt-4 grid gap-4 sm:grid-cols-2">
-          <input name="name" placeholder="Your name" required class="rounded-xl border px-4 py-3 text-sm" />
-          <input name="email" type="email" placeholder="Work email" required class="rounded-xl border px-4 py-3 text-sm" />
-          <input name="company" placeholder="Company" class="rounded-xl border px-4 py-3 text-sm sm:col-span-2" />
-          <input name="role" placeholder="Roles you’re hiring for" class="rounded-xl border px-4 py-3 text-sm sm:col-span-2" />
-          <input name="location" placeholder="Target countries / regions" class="rounded-xl border px-4 py-3 text-sm sm:col-span-2" />
-          <textarea name="notes" placeholder="Tech stack, seniority, hiring timelines, volume" rows="3" class="rounded-xl border px-4 py-3 text-sm sm:col-span-2"></textarea>
+        <p class="mt-1 text-xs text-neutral-500">We’ll reply with next steps and early access details.</p>
+
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">
+          <input name="name" placeholder="Your name" required class="rounded-xl border border-neutral-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/20" />
+          <input name="email" type="email" placeholder="Work email" required class="rounded-xl border border-neutral-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900/20" />
+          <input name="company" placeholder="Company" class="rounded-xl border border-neutral-300 px-4 py-3 text-sm sm:col-span-2 focus:outline-none focus:ring-2 focus:ring-neutral-900/20" />
+          <input name="role" placeholder="Roles you’re hiring for" class="rounded-xl border border-neutral-300 px-4 py-3 text-sm sm:col-span-2 focus:outline-none focus:ring-2 focus:ring-neutral-900/20" />
+          <input name="location" placeholder="Target countries / regions" class="rounded-xl border border-neutral-300 px-4 py-3 text-sm sm:col-span-2 focus:outline-none focus:ring-2 focus:ring-neutral-900/20" />
+          <textarea name="notes" placeholder="Tech stack, seniority, hiring timelines, volume" rows="3" class="rounded-xl border border-neutral-300 px-4 py-3 text-sm sm:col-span-2 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"></textarea>
         </div>
-        <label class="mt-2 inline-flex items-center gap-2 text-[10px] text-neutral-600">
+
+        <label class="mt-3 inline-flex items-center gap-2 text-[11px] text-neutral-600">
           <input type="checkbox" name="consent" required class="accent-[#D90429]" />
           I agree to be contacted by GradGoGlobal regarding recruiter access.
         </label>
-        <button class="mt-3 w-full rounded-2xl bg-neutral-900 px-5 py-3 text-white font-medium hover:bg-neutral-800">
+
+        <button class="mt-4 w-full btn-primary px-5 py-3 font-semibold">
           Submit &amp; Get Early Access
         </button>
       </form>
     </div>
   </section>
 
-  <!-- AI -->
-  <section id="innovation" class="py-20 reveal">
+  <!-- TALENT -->
+  <section id="talent" class="py-20 bg-neutral-50 reveal">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold">Introducing Global PriorityMatch AI™</h2>
-      <p class="mt-4 text-sm text-neutral-700 max-w-3xl">
-        The world’s first time-aware talent engine that connects opportunity and timing.
-        By analyzing hiring data, immigration timelines, and job demand,
-        Global PriorityMatch AI™ ensures connections happen when they matter most —
-        turning potential into placement.
-      </p>
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-6">
+          <div class="inline-flex items-center rounded-full border border-neutral-200 bg-white px-3 py-1 text-[11px] text-neutral-700">
+            For Talent
+          </div>
+
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight">Get global opportunities before your OPT expires.</h2>
+
+          <p class="mt-4 text-sm text-neutral-700">
+            You’ve built skills the world needs. GradGoGlobal connects your profile, goals, and hiring timeline with recruiters worldwide —
+            so your visibility spikes exactly when opportunities align with your work authorization window.
+          </p>
+
+          <div class="mt-6 grid gap-3">
+            <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <div class="font-semibold">What you’ll get</div>
+              <div class="mt-2 text-sm text-neutral-700 space-y-2">
+                <p>• Smart visibility powered by Global PriorityMatch AI™.</p>
+                <p>• Access to international recruiters seeking U.S.-trained graduates.</p>
+                <p>• Timing-aware discovery so you don’t miss your moment.</p>
+              </div>
+            </div>
+
+            <div class="pop-card rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+              <div class="text-sm font-semibold text-emerald-900">Momentum</div>
+              <div class="mt-1 text-sm text-emerald-800">124 students joined this week.</div>
+              <div class="mt-1 text-xs text-emerald-700">Early members receive priority visibility as recruiter cohorts onboard.</div>
+            </div>
+          </div>
+
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="https://forms.gle/CYfRoabvDvRPaGNu7" target="_blank" class="btn-primary inline-flex items-center px-6 py-4 font-semibold">
+              Create My Global Profile → Join Network
+            </a>
+            <a href="gousa.html" class="btn-secondary inline-flex items-center px-6 py-4 font-semibold">
+              GO USA (Feb 2026) →
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="grid gap-4 sm:grid-cols-2 auto-rows-fr">
+            <div class="pop-card h-full rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm flex flex-col">
+              <div class="text-xs text-neutral-500">Best for</div>
+              <div class="mt-1 font-semibold">F-1 / OPT timelines</div>
+              <div class="mt-2 text-sm text-neutral-600">
+                If you’re racing a deadline, we make your visibility deadline-aware.
+              </div>
+            </div>
+
+            <div class="pop-card h-full rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm flex flex-col">
+              <div class="text-xs text-neutral-500">Opportunities</div>
+              <div class="mt-1 font-semibold">Global roles</div>
+              <div class="mt-2 text-sm text-neutral-600">
+                We focus on roles outside the U.S. where offers can unlock work pathways.
+              </div>
+            </div>
+
+            <div class="pop-card h-full rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm flex flex-col sm:col-span-2">
+              <div class="text-xs text-neutral-500">Your edge</div>
+              <div class="mt-1 font-semibold">U.S.-trained, globally ready</div>
+              <div class="mt-2 text-sm text-neutral-600">
+                Recruiters get candidates who understand modern U.S. workplaces — communication, tools, and execution — with relocation readiness.
+              </div>
+            </div>
+
+            <div class="pop-card h-full rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm flex flex-col sm:col-span-2">
+              <div class="text-sm font-semibold">A quick promise</div>
+              <p class="mt-2 text-sm text-neutral-700">
+                You’re not “just applying.” You’re getting ranked and surfaced based on fit + timing —
+                so you show up when recruiters are actually ready to move.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" class="py-20 bg-white reveal">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-extrabold tracking-tight">Why GradGoGlobal</h2>
+        <p class="mt-3 text-sm text-neutral-700">
+          Global hiring has been slow, complex, and biased by geography. We’re changing that — with clarity, speed, and a timing-aware layer that finally matches how real hiring works.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <h3 class="font-semibold text-lg">Visa Time-Aware Matching</h3>
+          <p class="mt-2 text-sm text-neutral-600">We align open roles with each candidate’s time-sensitive hiring window for smarter connections.</p>
+        </div>
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <h3 class="font-semibold text-lg">Pre-Vetted Talent</h3>
+          <p class="mt-2 text-sm text-neutral-600">Profiles are structured for skills, credibility, and relocation readiness — so you start from trust, not guesswork.</p>
+        </div>
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <h3 class="font-semibold text-lg">Accelerated Time-to-Hire</h3>
+          <p class="mt-2 text-sm text-neutral-600">Reduce time-to-hire without compromising quality. What used to take months can happen in weeks.</p>
+        </div>
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <h3 class="font-semibold text-lg">When Timing Meets Talent</h3>
+          <p class="mt-2 text-sm text-neutral-600">Results happen when the right skills appear at the right time in front of the right teams. We engineer that.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 pop-card rounded-3xl border border-neutral-200 bg-neutral-50 p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <div class="text-sm font-semibold">If you’re a recruiter hiring globally</div>
+          <div class="mt-1 text-sm text-neutral-700">Get early access to the curated feed and reach U.S.-trained talent faster.</div>
+        </div>
+        <a href="#recruiters" class="btn-primary px-5 py-3 font-semibold">
+          Request access →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section id="innovation" class="py-20 bg-neutral-50 reveal">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold tracking-tight">Introducing Global PriorityMatch AI™</h2>
+        <p class="mt-4 text-sm text-neutral-700">
+          The time-aware talent engine that connects opportunity and timing.
+          By analyzing hiring signals, candidate skills, relocation readiness, and authorization timelines,
+          PriorityMatch AI™ ensures connections happen when they matter most — turning potential into placement.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <div class="text-xs text-neutral-500">Signal 01</div>
+          <div class="mt-1 font-semibold">Role + skill fit</div>
+          <p class="mt-2 text-sm text-neutral-600">Matches by real competencies, not just keywords.</p>
+        </div>
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <div class="text-xs text-neutral-500">Signal 02</div>
+          <div class="mt-1 font-semibold">Timeline alignment</div>
+          <p class="mt-2 text-sm text-neutral-600">Surfaces candidates whose time windows match hiring urgency.</p>
+        </div>
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm">
+          <div class="text-xs text-neutral-500">Signal 03</div>
+          <div class="mt-1 font-semibold">Relocation readiness</div>
+          <p class="mt-2 text-sm text-neutral-600">Prioritizes candidates ready to move where the job is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-20 bg-white reveal">
+    <div class="container mx-auto px-4 grid lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-7">
+        <h2 class="text-3xl font-extrabold tracking-tight">About GradGoGlobal</h2>
+        <p class="mt-4 text-sm text-neutral-700">
+          GradGoGlobal is redefining global hiring with a simple belief — <strong>skill is the only variable.</strong>
+          We’re building an AI platform that matches U.S.-trained international talent with global recruiters,
+          not just by experience, but by <strong>visa timing and hiring windows.</strong>
+        </p>
+        <p class="mt-3 text-sm text-neutral-700">
+          Founded in Boston in 2025, GradGoGlobal sits at the intersection of AI, timing, and talent — creating a new category in fair global mobility.
+        </p>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="pop-card rounded-3xl border border-neutral-200 bg-neutral-50 p-7">
+          <div class="text-sm font-semibold">Our mission</div>
+          <p class="mt-2 text-sm text-neutral-700">
+            To make global careers accessible, efficient, and fair — where opportunity is defined by skill, not borders or paperwork.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="#talent" class="btn-primary px-5 py-3 font-semibold">Join as Talent →</a>
+            <a href="#recruiters" class="btn-secondary px-5 py-3 font-semibold">Recruiter Access →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-neutral-50 reveal">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-extrabold tracking-tight">Frequently asked questions</h2>
+        <p class="mt-3 text-sm text-neutral-700">Quick answers for recruiters and talent.</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2">
+        <details class="pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold">Do you focus on U.S. jobs?</summary>
+          <p class="mt-2 text-sm text-neutral-700">GradGoGlobal focuses on global roles outside the U.S. for U.S.-trained international talent.</p>
+        </details>
+
+        <details class="pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold">What is “time-aware” matching?</summary>
+          <p class="mt-2 text-sm text-neutral-700">We align recruiter hiring windows with candidate authorization timelines so connections happen when hiring is actually possible.</p>
+        </details>
+
+        <details class="pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold">How do recruiters get access?</summary>
+          <p class="mt-2 text-sm text-neutral-700">Use the recruiter request form above. We’ll follow up with early access as cohorts onboard.</p>
+        </details>
+
+        <details class="pop-card rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold">How do students join?</summary>
+          <p class="mt-2 text-sm text-neutral-700">Create your profile via the Talent form. Early members get priority visibility as recruiter cohorts expand.</p>
+        </details>
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-16 reveal">
+  <section id="contact" class="py-12 sm:py-14 bg-black text-white reveal">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-2xl font-semibold mb-3">Let’s redefine how the world hires.</h2>
-      <p class="text-sm text-neutral-700 max-w-2xl mx-auto">
-        Whether you’re building global teams or looking for your next role, GradGoGlobal is here to align skill, timing, and opportunity.
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+        Let’s redefine how the world hires.
+      </h2>
+
+      <p class="mt-3 text-sm sm:text-base text-neutral-300 max-w-2xl mx-auto">
+        Whether you’re building global teams or looking for your next role, GradGoGlobal is here to align skill,
+        timing, and opportunity.
       </p>
 
-      <div class="mt-5 text-sm text-neutral-800 space-y-1">
-        <p>📍 Boston, Massachusetts</p>
-        <p>📞 +1 (617) 216-7028</p>
-        <p>🌐 gradgoglobal.com</p>
-        <p>✉️ <strong>shamik@gradgoglobalapp.com</strong></p>
+      <div class="mt-7 inline-flex flex-wrap items-center justify-center gap-3">
+        <a href="#recruiters" class="btn-primary px-6 py-4 font-semibold">
+          Recruiter Access →
+        </a>
+
+        <a href="https://forms.gle/CYfRoabvDvRPaGNu7" target="_blank" class="btn-secondary px-6 py-4 font-semibold">
+          Join as Talent →
+        </a>
       </div>
 
-      <p class="mt-4 text-xs text-neutral-500">
+      <div class="mt-8 mx-auto max-w-xl pop-card rounded-3xl border border-white/10 bg-white/5 p-6 text-sm">
+        <div class="grid gap-2 text-neutral-200">
+          <div class="flex items-center justify-center gap-2">
+            <span>📍</span><span>Boston, Massachusetts</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span>📞</span><span>+1 (617) 216-7028</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span>🌐</span><span>gradgoglobal.com</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span>✉️</span><span class="font-semibold">shamik@gradgoglobalapp.com</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-5 text-xs text-neutral-400">
         GradGoGlobal focuses on global roles outside the U.S. for U.S.-trained international talent.
       </p>
+
       <p class="mt-2 text-xs text-neutral-500">
         © <span id="year"></span> GradGoGlobal — All rights reserved.
       </p>
@@ -497,6 +835,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
